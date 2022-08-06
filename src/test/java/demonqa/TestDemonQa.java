@@ -36,8 +36,6 @@ public class TestDemonQa {
         $("#uploadPicture").uploadFile(new File("src/test/resources/Photo.jpg"));
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Delhi").pressEnter().pressEnter();
-
-
         $$("tbody tr").filterBy(text("Student Name")).shouldHave(texts("Gosling Ryan"));
         $$("tbody tr").filterBy(text("Student Email")).shouldHave(texts("hellomyprepod@gmail.com"));
         $$("tbody tr").filterBy(text("Gender")).shouldHave(texts("Male"));
@@ -48,12 +46,6 @@ public class TestDemonQa {
         $$("tbody tr").filterBy(text("Picture")).shouldHave(texts("Photo.jpg"));
         $$("tbody tr").filterBy(text("Address")).shouldHave(texts("Lenin st. b.12 a.7 "));
         $$("tbody tr").filterBy(text("State and City")).shouldHave(texts("NCR Delhi"));
-
-
-
-
-
-
 
     }
 }
