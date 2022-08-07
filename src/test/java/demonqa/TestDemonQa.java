@@ -8,6 +8,7 @@ import java.io.File;
 
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.remote.tracing.EventAttribute.setValue;
 
@@ -30,10 +31,10 @@ public class TestDemonQa {
         $(".react-datepicker__week .react-datepicker__day--021").click();
         $("#userNumber").setValue("5474575555");
         $("#subjectsInput").setValue("Maths").pressEnter();
-        $("[for=gender-radio-1]").click();
-        $("[for=hobbies-checkbox-1]").click();
+        $(byTagAndText("label","Sports")).click();
+        $(byTagAndText("label","Male")).click();
         $("#currentAddress").setValue("Lenin st. b.12 a.7");
-        $("#uploadPicture").uploadFile(new File("src/test/resources/Photo.jpg"));
+        $("#uploadPicture").uploadFromClasspath("Photo.jpg");
         $("#react-select-3-input").setValue("NCR").pressEnter();
         $("#react-select-4-input").setValue("Delhi").pressEnter().pressEnter();
         $$("tbody tr").filterBy(text("Student Name")).shouldHave(texts("Gosling Ryan"));
