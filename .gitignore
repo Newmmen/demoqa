@@ -27,6 +27,7 @@ build/
 .gradle
 gradlew
 gradlew.bat
+gradle-wrapper
 
 ### NetBeans ###
 /nbproject/private/
