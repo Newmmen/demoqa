@@ -13,7 +13,6 @@ public class TestDemonQa {
     @BeforeEach
     void openDemonQa() {
         open("https://demoqa.com/automation-practice-form");
-
     }
 
     @Test
@@ -43,6 +42,5 @@ public class TestDemonQa {
         $$("tbody tr").filterBy(text("Picture")).shouldHave(texts("Photo.jpg"));
         $$("tbody tr").filterBy(text("Address")).shouldHave(texts("Lenin st. b.12 a.7 "));
         $$("tbody tr").filterBy(text("State and City")).shouldHave(texts("NCR Delhi"));
-
     }
 }
