@@ -25,6 +25,8 @@ build/
 
 ### Gradle ###
 .gradle
+gradlew
+gradlew.bat
 
 ### NetBeans ###
 /nbproject/private/
@@ -36,3 +38,4 @@ build/
 
 ### VS Code ###
 .vscode/
+

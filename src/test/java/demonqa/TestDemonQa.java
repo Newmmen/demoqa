@@ -1,25 +1,21 @@
 package demonqa;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byTagAndText;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static org.openqa.selenium.remote.tracing.EventAttribute.setValue;
 
 public class TestDemonQa {
 
     @BeforeEach
-    void openDemonQa(){
+    void openDemonQa() {
         open("https://demoqa.com/automation-practice-form");
 
-
     }
+
     @Test
     void registerUser() {
         $("#firstName").setValue("Gosling");
@@ -31,8 +27,8 @@ public class TestDemonQa {
         $(".react-datepicker__week .react-datepicker__day--021").click();
         $("#userNumber").setValue("5474575555");
         $("#subjectsInput").setValue("Maths").pressEnter();
-        $(byTagAndText("label","Sports")).click();
-        $(byTagAndText("label","Male")).click();
+        $("#hobbiesWrapper").$(byText("Sports")).click();
+        $("#genterWrapper").$(byText("Male")).click();
         $("#currentAddress").setValue("Lenin st. b.12 a.7");
         $("#uploadPicture").uploadFromClasspath("Photo.jpg");
         $("#react-select-3-input").setValue("NCR").pressEnter();
