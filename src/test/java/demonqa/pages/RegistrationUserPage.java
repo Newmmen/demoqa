@@ -1,5 +1,7 @@
 package demonqa.pages;
 
+import com.codeborne.selenide.SelenideElement;
+
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -8,46 +10,62 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationUserPage {
-   public void openRegisterPage() {
+
+
+    private SelenideElement firstNameInput = $("#firstName"),
+            lastNameInput =  $("#lastName"),
+            userEmailInput = $("#userEmail"),
+            userGenderInput = $("#genterWrapper"),
+            userNumberInput = $("#userNumber"),
+            userSubjectInput =  $("#subjectsInput"),
+            userHobbyInput = $("#hobbiesWrapper"),
+            userCurrentAddressInput = $("#currentAddress"),
+            uploadUserPhotoInput = $("#uploadPicture"),
+            userStateInput = $("#stateCity-wrapper #react-select-3-input"),
+            userCityInput = $("#stateCity-wrapper #react-select-4-input");
+
+
+   public RegistrationUserPage openRegisterPage() {
         open("https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").$(byText("Student Registration Form")).shouldBe(visible);
-    }
+        return this;
+   }
     public void setFirstName(String value) {
-        $("#firstName").setValue(value);
+        firstNameInput.setValue(value);
 
     }
     public void setLastName(String value) {
-        $("#lastName").setValue(value);
+        lastNameInput.setValue(value);
 
     }
     public void setUserEmail(String value) {
-        $("#userEmail").setValue(value);
+        userEmailInput.setValue(value);
 
     }
     public void setUserGender(String value) {
-        $("#genterWrapper").$(byText(value)).click();
+        userGenderInput.$(byText(value)).click();
     }
     public void setUserNumber(String value) {
-        $("#userNumber").setValue(value);
+        userNumberInput.setValue(value);
     }
     public void setUserSubject(String value) {
-       $("#subjectsInput").setValue(value).pressEnter();
+        userSubjectInput.setValue(value).pressEnter();
 
     }
     public void setUserHobby(String value) {
-        $("#hobbiesWrapper").$(byText(value)).click();
+        userHobbyInput.$(byText(value)).click();
     }
     public void setCurrentAddress(String value) {
-        $("#currentAddress").setValue(value);
+        userCurrentAddressInput.setValue(value);
     }
     public void uploadUserPhoto(String filename) {
-        $("#uploadPicture").uploadFromClasspath(filename);
+        uploadUserPhotoInput.uploadFromClasspath(filename);
     }
 
 
     public void setStateAndCity(String state,String city) {
-        $("#stateCity-wrapper #react-select-3-input").setValue(state).pressEnter();
-        $("#stateCity-wrapper #react-select-4-input").setValue(city).pressEnter();
+        userStateInput.setValue(state).pressEnter();
+        userCityInput.setValue(city).pressEnter();
     }
 
 
