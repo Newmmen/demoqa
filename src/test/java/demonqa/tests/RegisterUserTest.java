@@ -23,8 +23,7 @@ public class RegisterUserTest {
 
     @Test
     void registerUser() {
-        registrationUserPage.openRegisterPage();
-        registrationUserPage.setFirstName("Gosling");
+        registrationUserPage.openRegisterPage().setFirstName("Gosling");
         registrationUserPage.setLastName("Ryan");
         registrationUserPage.setUserEmail("hellomyprepod@gmail.com");
         registrationUserPage.setUserGender("Male");
