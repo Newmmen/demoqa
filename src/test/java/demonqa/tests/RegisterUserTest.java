@@ -3,14 +3,7 @@ package demonqa.tests;
 import com.codeborne.selenide.Configuration;
 import demonqa.pages.RegistrationUserPage;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class RegisterUserTest {
     RegistrationUserPage registrationUserPage = new RegistrationUserPage();
@@ -23,35 +16,31 @@ public class RegisterUserTest {
 
     @Test
     void registerUser() {
-        registrationUserPage.openRegisterPage().setFirstName("Gosling");
-        registrationUserPage.setLastName("Ryan");
-        registrationUserPage.setUserEmail("hellomyprepod@gmail.com");
-        registrationUserPage.setUserGender("Male");
-        registrationUserPage.setUserNumber("1234567895");
-        registrationUserPage.setUserSubject("Math");
-        registrationUserPage.setUserHobby("Sports");
-        registrationUserPage.setStateAndCity("NCR","Delhi");
-        registrationUserPage.setCurrentAddress("Lenin st. b.12 a.7");
-        registrationUserPage.uploadUserPhoto("Photo.jpg");
+        registrationUserPage.openRegisterPage()
+                .setFirstName("Gosling")
+                .setLastName("Ryan")
+                .setUserEmail("hellomyprepod@gmail.com")
+                .setUserGender("Male")
+                .setUserNumber("1234567895")
+                .setUserSubject("Math")
+                .setUserHobby("Sports")
+                .setStateAndCity("NCR", "Delhi")
+                .setCurrentAddress("Lenin st. b.12 a.7")
+                .uploadUserPhoto("Photo.jpg")
+                .setBirthDate("1996", "December", "20")
+                .clickConfirmButton();
 
+        registrationUserPage.checkModalResultVisible()
+                .checkResult("Student Name", "Gosling Ryan")
+                .checkResult("Student Email", "hellomyprepod@gmail.com")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "1234567895")
+                .checkResult("Date of Birth", "20 December,1996")
+                .checkResult("Subjects", "Maths")
+                .checkResult("Hobbies", "Sports")
+                .checkResult("Picture", "Photo.jpg")
+                .checkResult("Address", "Lenin st. b.12 a.7")
+                .checkResult("State and City", "NCR Delhi");
 
-
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").$(byText("December")).click();
-        $(".react-datepicker__year-select").$(byText("1996")).click();
-        $(".react-datepicker__month").$(byText("20")).click();
-
-
-
-        $$("tbody tr").filterBy(text("Student Name")).shouldHave(texts("Gosling Ryan"));
-        $$("tbody tr").filterBy(text("Student Email")).shouldHave(texts("hellomyprepod@gmail.com"));
-        $$("tbody tr").filterBy(text("Gender")).shouldHave(texts("Male"));
-        $$("tbody tr").filterBy(text("Mobile")).shouldHave(texts("1234567895"));
-        $$("tbody tr").filterBy(text("Date of Birth")).shouldHave(texts("20 December,1996"));
-        $$("tbody tr").filterBy(text("Subjects")).shouldHave(texts("Maths"));
-        $$("tbody tr").filterBy(text("Hobbies")).shouldHave(texts("Sports"));
-        $$("tbody tr").filterBy(text("Picture")).shouldHave(texts("Photo.jpg"));
-        $$("tbody tr").filterBy(text("Address")).shouldHave(texts("Lenin st. b.12 a.7 "));
-        $$("tbody tr").filterBy(text("State and City")).shouldHave(texts("NCR Delhi"));
     }
 }
