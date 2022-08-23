@@ -1,46 +1,65 @@
 package demonqa.tests;
 
-import com.codeborne.selenide.Configuration;
+import com.github.javafaker.Faker;
 import demonqa.pages.RegistrationUserPage;
-import org.junit.jupiter.api.BeforeAll;
+import demonqa.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
-public class RegisterUserTest {
+import java.util.Locale;
+
+import static java.lang.String.format;
+
+public class RegisterUserTest extends TestBase {
     RegistrationUserPage registrationUserPage = new RegistrationUserPage();
 
-    @BeforeAll
-    static void configure() {
-        Configuration.browserSize = "1920x1080";
-    }
+    Faker faker = new Faker(new Locale("EN"));
+    RandomUtils randomUtils = new RandomUtils();
 
+    String userFirstName = faker.name().firstName(),
+            userLastName = faker.name().lastName(),
+            userEmail = faker.internet().emailAddress(),
+            userGender = "Male",
+            userPhoneNumber = faker.phoneNumber().subscriberNumber(10),
+            userSubject = "Maths",
+            userHobby = "Sports",
+            userState = "NCR",
+            userCity = "Delhi",
+            userCurrentAddress = faker.address().fullAddress(),
+            userBirthDateDay = faker.number().numberBetween(1, 30) + "",
+            userBirthDateMonth = randomUtils.getRandomMonth(),
+            userBirthDateYear = faker.number().numberBetween(1990, 2000) + "",
+            userPhotoName = "Photo.jpg";
+    String expectedFullName = format("%s %s", userFirstName, userLastName),
+            expectedStateAndCity = format("%s %s", userState, userCity),
+            expectedBirthDate = format("%s %s,%s", userBirthDateDay, userBirthDateMonth, userBirthDateYear);
 
     @Test
     void registerUser() {
         registrationUserPage.openRegisterPage()
-                .setFirstName("Gosling")
-                .setLastName("Ryan")
-                .setUserEmail("hellomyprepod@gmail.com")
-                .setUserGender("Male")
-                .setUserNumber("1234567895")
-                .setUserSubject("Math")
-                .setUserHobby("Sports")
-                .setStateAndCity("NCR", "Delhi")
-                .setCurrentAddress("Lenin st. b.12 a.7")
-                .uploadUserPhoto("Photo.jpg")
-                .setBirthDate("1996", "December", "20")
+                .setFirstName(userFirstName)
+                .setLastName(userLastName)
+                .setUserEmail(userEmail)
+                .setUserGender(userGender)
+                .setUserNumber(userPhoneNumber)
+                .setUserSubject(userSubject)
+                .setUserHobby(userHobby)
+                .setStateAndCity(userState, userCity)
+                .setCurrentAddress(userCurrentAddress)
+                .uploadUserPhoto(userPhotoName)
+                .setBirthDate(userBirthDateYear, userBirthDateMonth, userBirthDateDay)
                 .clickConfirmButton();
 
         registrationUserPage.checkModalResultVisible()
-                .checkResult("Student Name", "Gosling Ryan")
-                .checkResult("Student Email", "hellomyprepod@gmail.com")
-                .checkResult("Gender", "Male")
-                .checkResult("Mobile", "1234567895")
-                .checkResult("Date of Birth", "20 December,1996")
-                .checkResult("Subjects", "Maths")
-                .checkResult("Hobbies", "Sports")
-                .checkResult("Picture", "Photo.jpg")
-                .checkResult("Address", "Lenin st. b.12 a.7")
-                .checkResult("State and City", "NCR Delhi");
+                .checkResult("Student Name", expectedFullName)
+                .checkResult("Student Email", userEmail)
+                .checkResult("Gender", userGender)
+                .checkResult("Mobile", userPhoneNumber)
+                .checkResult("Date of Birth", expectedBirthDate)
+                .checkResult("Subjects", userSubject)
+                .checkResult("Hobbies", userHobby)
+                .checkResult("Picture", userPhotoName)
+                .checkResult("Address", userCurrentAddress)
+                .checkResult("State and City", expectedStateAndCity);
 
     }
 }
