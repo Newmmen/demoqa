@@ -40,6 +40,7 @@ public class RegisterUserTest extends TestBase {
 
     @Test
     @DisplayName("Проверка корректности сохранения даных при регистрации пользователя")
+
     void registerUser() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         registrationUserPage.openRegisterPage()
