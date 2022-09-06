@@ -1,8 +1,10 @@
 package demonqa.tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import demonqa.pages.RegistrationUserPage;
 import demonqa.utils.RandomUtils;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -10,7 +12,9 @@ import java.util.Locale;
 import static java.lang.String.format;
 
 public class RegisterUserTest extends TestBase {
+
     RegistrationUserPage registrationUserPage = new RegistrationUserPage();
+    WebHelper webHelper = new WebHelper();
 
     Faker faker = new Faker(new Locale("EN"));
     RandomUtils randomUtils = new RandomUtils();
@@ -35,6 +39,7 @@ public class RegisterUserTest extends TestBase {
 
     @Test
     void registerUser() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         registrationUserPage.openRegisterPage()
                 .setFirstName(userFirstName)
                 .setLastName(userLastName)
@@ -60,6 +65,8 @@ public class RegisterUserTest extends TestBase {
                 .checkResult("Picture", userPhotoName)
                 .checkResult("Address", userCurrentAddress)
                 .checkResult("State and City", expectedStateAndCity);
+        webHelper.takeScreenShot();
+        webHelper.addPageSource();
 
     }
 }
