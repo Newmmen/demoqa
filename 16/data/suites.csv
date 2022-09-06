@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Tue Sep 06 20:00:55 GMT 2022","Tue Sep 06 20:00:55 GMT 2022","20","","demonqa.tests.RegisterUserTest","","demonqa.tests.RegisterUserTest","registerUser","Проверка корректности сохранения даных при регистрации пользователя",""
