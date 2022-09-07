@@ -17,7 +17,7 @@ public class WebHelper {
     public String addPageSource() {
         return (WebDriverRunner.getWebDriver().getPageSource());
     }
-    void removeBanner(){
+    public void removeBanner(){
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('#fixedban').remove()");
     }
