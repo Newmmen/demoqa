@@ -3,6 +3,7 @@ package demonqa.pages;
 import com.codeborne.selenide.SelenideElement;
 import demonqa.pages.components.CalendarComponent;
 import demonqa.pages.components.ModalResultComponent;
+import demonqa.tests.WebHelper;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -11,6 +12,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class RegistrationUserPage {
+    WebHelper webHelper = new WebHelper();
 
     private CalendarComponent calendarComponent = new CalendarComponent();
     private ModalResultComponent modalResultComponent = new ModalResultComponent();
@@ -33,6 +35,7 @@ public class RegistrationUserPage {
     public RegistrationUserPage openRegisterPage() {
         open("https://demoqa.com/automation-practice-form");
         $(".practice-form-wrapper").$(byText("Student Registration Form")).shouldBe(visible);
+        webHelper.removeBanner();
         return this;
     }
 
