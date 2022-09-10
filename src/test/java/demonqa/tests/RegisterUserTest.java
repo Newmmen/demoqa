@@ -15,7 +15,6 @@ import static java.lang.String.format;
 public class RegisterUserTest extends TestBase {
 
     RegistrationUserPage registrationUserPage = new RegistrationUserPage();
-    WebHelper webHelper = new WebHelper();
 
     Faker faker = new Faker(new Locale("EN"));
     RandomUtils randomUtils = new RandomUtils();
@@ -67,8 +66,8 @@ public class RegisterUserTest extends TestBase {
                 .checkResult("Picture", userPhotoName)
                 .checkResult("Address", userCurrentAddress)
                 .checkResult("State and City", expectedStateAndCity);
-        webHelper.takeScreenShot();
-        webHelper.addPageSource();
+        Attach.addAttachments();
+
 
     }
 }
