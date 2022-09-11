@@ -9,13 +9,14 @@ public class TestBase {
 
     @BeforeAll
     static void configure() {
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
-        Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        if(System.getProperty("selenide.remote") != null) {
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            Configuration.remote = System.getProperty("selenide.remote");
+        }
+        Configuration.browserSize = System.getProperty("browser_size","1920x1080");
 
     }
 }
