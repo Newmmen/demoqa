@@ -6,6 +6,7 @@ import demonqa.pages.RegistrationUserPage;
 import demonqa.utils.RandomUtils;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -38,6 +39,7 @@ public class RegisterUserTest extends TestBase {
             expectedBirthDate = format("%s %s,%s", userBirthDateDay, userBirthDateMonth, userBirthDateYear);
 
     @Test
+    @Tag("demoqa")
     @DisplayName("Проверка корректности сохранения даных при регистрации пользователя")
     void registerUser() {
         SelenideLogger.addListener("allure", new AllureSelenide());

@@ -50,5 +50,10 @@ task properties_test(type: Test) {
         useJUnitPlatform {
             includeTags "hello"
         }
+        task demoqa(type: Test) {
+            useJUnitPlatform {
+                includeTags "demoqa"
+            }
+        }
     }
 }
