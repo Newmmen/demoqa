@@ -72,4 +72,38 @@ public class RegisterUserTest extends TestBase {
 
 
     }
+    @Test
+    @Tag("demoqa")
+    @DisplayName("Регистрация пользователя (этот кейс падает с ошибкой)")
+    void registerUserWithMistake() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        registrationUserPage.openRegisterPage()
+                .setFirstName(userFirstName)
+                .setLastName(userLastName)
+                .setUserEmail(userEmail)
+                .setUserGender(userEmail)
+                .setUserNumber(userPhoneNumber)
+                .setUserSubject(userSubject)
+                .setUserHobby(userHobby)
+                .setStateAndCity(userState, userCity)
+                .setCurrentAddress(userCurrentAddress)
+                .uploadUserPhoto(userPhotoName)
+                .setBirthDate(userBirthDateYear, userBirthDateMonth, userBirthDateDay)
+                .clickConfirmButton();
+
+        registrationUserPage.checkModalResultVisible()
+                .checkResult("Student Name", expectedFullName)
+                .checkResult("Student Email", userEmail)
+                .checkResult("Gender", userGender)
+                .checkResult("Mobile", userPhoneNumber)
+                .checkResult("Date of Birth", expectedBirthDate)
+                .checkResult("Subjects", userSubject)
+                .checkResult("Hobbies", userHobby)
+                .checkResult("Picture", userPhotoName)
+                .checkResult("Address", userCurrentAddress)
+                .checkResult("State and City", expectedStateAndCity);
+        Attach.addAttachments();
+
+
+    }
 }
